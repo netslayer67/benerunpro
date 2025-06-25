@@ -13,7 +13,6 @@ const navItems = [
 
 const Navbar = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const { mode, toggleTheme } = useTheme();
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-blend-saturation backdrop-blur-md border-b border-white/5">
