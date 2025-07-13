@@ -23,7 +23,7 @@ function App() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-black via-blue-800 to-black bg-pattern">
+      <div className="min-h-screen bg-gradient-to-br from-black via-green-800 to-black bg-pattern">
         <Navbar />
         <HeroSection />
         <AboutSection />

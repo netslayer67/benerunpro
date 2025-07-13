@@ -1,18 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight, PlayCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const HeroSection = () => {
   const { toast } = useToast();
-
-  const handleWhatsAppClick = () => {
-    toast({
-      title: "🚧 Fitur ini belum tersedia. Minta langsung ke tim kami! 🚀",
-      duration: 4000,
-    });
-  };
 
   const handleConsultationClick = () => {
     toast({
@@ -21,146 +14,125 @@ const HeroSection = () => {
     });
   };
 
+  const floatingVariants = {
+    float: {
+      y: [0, -10, 0, 10, 0],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-black">
-      {/* 🎥 Background Video */}
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden px-4 pt-32 pb-20 md:pt-40 md:pb-24">
+      {/* Background Layer 1: Video */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ opacity: 0.15 }} // Adjust opacity to blend with effects
       >
         <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4" />
-        {/* Fallback gradient blob */}
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-10 animate-blob" />
       </video>
 
-      {/* Floating Blobs (extra ambient) */}
-      <motion.div
-        className="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl"
-        animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.4, 0.1] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-10 right-10 w-36 h-36 bg-purple-600/20 rounded-full blur-3xl"
-        animate={{ scale: [1.1, 1, 1.1], opacity: [0.1, 0.3, 0.1] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
+      {/* Background Layer 2: Effects */}
+      {/* Grid Background Pattern */}
+      <div className="absolute inset-0 z-[1]">
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:36px_36px]"
+          style={{ maskImage: 'radial-gradient(ellipse at center, white 20%, transparent 70%)' }}
+        />
+      </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      {/* Radial Glow Effect */}
+      <div className="absolute top-1/2 left-1/2 -z-[1] h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-500/10 blur-[120px] animate-pulse" />
+
+      {/* Content Layer */}
+      <div className="relative z-10 grid max-w-7xl grid-cols-1 md:grid-cols-2 items-center gap-12 text-white">
+        {/* Left Side: Headline & CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-5xl mx-auto"
+          className="flex flex-col items-start text-left"
         >
-          {/* Branding */}
+          <h1 className="text-5xl font-bold tracking-tighter text-white sm:text-6xl md:text-7xl">
+            Ubah Ide Menjadi
+            <br />
+            <span className="bg-gradient-to-br from-sky-300 to-blue-500 bg-clip-text text-transparent">
+              Karya Digital.
+            </span>
+          </h1>
+          <p className="mt-6 max-w-lg text-lg text-gray-300 md:text-xl">
+            Kami bukan hanya agensi. Kami adalah mitra strategis Anda dalam menciptakan konten yang tidak hanya dilihat, tapi juga dirasakan—dan menghasilkan konversi.
+          </p>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-10"
-          >
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
-              <span className="text-white">BENERUN</span>{' '}
-              <span className="text-xl md:text-2xl text-blue-300 font-medium uppercase tracking-wider">Project</span>
-            </h1>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-3xl md:text-5xl font-semibold leading-tight text-white mb-6"
-          >
-            Konten Menarik,{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-white">
-              Interaksi Meledak
-            </span>
-            <br />— Bersama Benerun Pro!
-          </motion.h2>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Solusi konten dan digital presence yang menjangkau lebih luas dan membangun loyalitas audiens — tanpa ribet.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
+            className="mt-10 flex flex-col items-start gap-4 sm:flex-row"
           >
             <Button
-              onClick={handleWhatsAppClick}
               size="lg"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg font-medium rounded-2xl shadow-md hover:scale-105 transition-transform"
-            >
-              <MessageCircle className="w-5 h-5 mr-3" />
-              Chat WhatsApp
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-
-            <Button
               onClick={handleConsultationClick}
+              className="group relative inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-base font-bold text-black shadow-lg transition-transform hover:scale-105"
+            >
+              Mulai Konsultasi Gratis
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button
               variant="outline"
               size="lg"
-              className="bg-white/10 hover:bg-white/20 border border-blue-300 text-white px-8 py-4 text-lg font-medium rounded-2xl shadow-md backdrop-blur-sm hover:scale-105 transition-transform"
+              className="group relative inline-flex h-12 items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-base font-bold text-white shadow-lg backdrop-blur-sm transition-transform hover:scale-105 hover:bg-white/10"
             >
-              <Sparkles className="w-5 h-5 mr-3" />
-              Konsultasi Gratis
+              <PlayCircle className="mr-2 h-5 w-5 text-gray-400 transition-colors group-hover:text-white" />
+              Lihat Portfolio
             </Button>
           </motion.div>
+        </motion.div>
 
-          {/* Trust Indicators */}
+        {/* Right Side: Floating Visuals */}
+        <div className="relative hidden h-full w-full items-center justify-center md:flex">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center items-center text-sm text-gray-300"
+            variants={floatingVariants}
+            animate="float"
+            className="glass-card absolute top-10 right-0 w-60 rounded-2xl p-4 shadow-2xl"
+            style={{ transform: 'rotate(5deg)' }}
           >
-            {[
-              ['bg-green-400', '100+ Klien Puas'],
-              ['bg-blue-400', 'Hasil Terbukti'],
-              ['bg-purple-400', 'Konsultasi Gratis']
-            ].map(([bg, label], i) => (
-              <div key={i} className="flex items-center gap-3 justify-center">
-                <div className={`w-3 h-3 ${bg} rounded-full animate-pulse`} />
-                <span className="font-medium">{label}</span>
-              </div>
-            ))}
+            <p className="text-sm font-bold">Kampanye Fashion Z</p>
+            <p className="mt-1 text-xs text-gray-400">Peningkatan Engagement: +450%</p>
+            <div className="mt-3 h-20 w-full rounded-lg bg-pink-500/20"></div>
           </motion.div>
-        </motion.div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-1"
-        >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-white/70 rounded-full"
-          />
-        </motion.div>
-      </motion.div>
+            variants={floatingVariants}
+            animate="float"
+            transition={{ duration: 10 }}
+            className="glass-card absolute bottom-16 left-0 w-52 rounded-2xl p-4 shadow-2xl"
+            style={{ transform: 'rotate(-8deg)' }}
+          >
+            <p className="text-sm font-bold">Website Interaktif Kopi</p>
+            <p className="mt-1 text-xs text-gray-400">Conversion Rate: 18.5%</p>
+            <div className="mt-3 h-16 w-full rounded-lg bg-green-500/20"></div>
+          </motion.div>
+
+          <motion.div
+            variants={floatingVariants}
+            animate="float"
+            transition={{ duration: 12 }}
+            className="glass-card absolute -bottom-8 right-10 w-48 rounded-2xl p-4 shadow-2xl"
+            style={{ transform: 'rotate(12deg)' }}
+          >
+            <p className="text-sm font-bold">Konten Edukasi Viral</p>
+            <p className="mt-1 text-xs text-gray-400">Organik Views: +500K</p>
+            <div className="mt-3 h-12 w-full rounded-lg bg-purple-500/20"></div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 };

@@ -1,141 +1,153 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Users, Award, Target } from 'lucide-react';
+import { TrendingUp, Users, Award, Target, CheckCircle, BrainCircuit, PenTool } from 'lucide-react';
 
 const AboutSection = () => {
+  // Data untuk kartu statistik
   const stats = [
     {
       icon: TrendingUp,
       number: "300%",
       label: "Peningkatan Engagement",
-      description: "Rata-rata peningkatan interaksi klien"
+      description: "Rata-rata interaksi audiens klien kami."
     },
     {
       icon: Users,
       number: "150+",
-      label: "Klien Aktif",
-      description: "Brand yang mempercayai layanan kami"
+      label: "Klien Puas",
+      description: "Brand yang tumbuh bersama kami."
     },
     {
       icon: Award,
       number: "500K+",
       label: "Views Generated",
-      description: "Total views yang dihasilkan untuk klien"
+      description: "Total tayangan dari konten yang kami buat."
     },
     {
       icon: Target,
       number: "95%",
       label: "Success Rate",
-      description: "Tingkat kepuasan dan hasil yang dicapai"
+      description: "Tingkat kepuasan & pencapaian target."
     }
   ];
 
+  // Data untuk poin keunggulan
+  const whyPoints = [
+    {
+      icon: BrainCircuit,
+      title: 'Strategi Berbasis Data',
+      description: 'Setiap konten lahir dari analisis mendalam terhadap tren dan audiens Anda.',
+    },
+    {
+      icon: PenTool,
+      title: 'Eksekusi Kreatif Tanpa Batas',
+      description: 'Tim ahli kami siap mengubah ide paling liar menjadi kenyataan digital yang memukau.',
+    },
+    {
+      icon: CheckCircle,
+      title: 'Hasil Terukur & Transparan',
+      description: 'Kami berkomitmen pada hasil nyata yang dapat Anda lihat dan rasakan dampaknya.',
+    },
+  ];
+
+  // Varian animasi untuk Framer Motion
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1, y: 0,
+      // FIX: Mengganti nilai 'ease' yang salah dengan string yang valid
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
   return (
-    <section className="relative py-24 overflow-hidden bg-black text-white">
-      {/* Gradient Background */}
+    <section id="services" className="relative py-24 sm:py-32 overflow-hidden">
+      {/* ADDED: Background Effects Container */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        {/* Grid Background Pattern */}
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:36px_36px]"
+          style={{ maskImage: 'radial-gradient(ellipse at center, white 5%, transparent 60%)' }}
+        />
+        {/* Radial Glow Effect */}
+        <div className="absolute top-1/4 left-1/4 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-[120px] animate-pulse" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Headline */}
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Judul Utama */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-center mb-16 md:mb-24 max-w-4xl mx-auto"
         >
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-6 text-shadow-md">
-            Track Record yang <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Memukau</span>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Benerun Pro telah membantu ratusan brand mengubah strategi konten mereka
-            menjadi mesin engagement yang powerful. Lihat bagaimana kami mengubah
-            permainan digital marketing untuk klien-klien kami.
-          </p>
+          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white">
+            Bukan Sekadar Agensi,
+          </motion.h2>
+          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter bg-gradient-to-br from-sky-300 to-blue-500 bg-clip-text text-transparent">
+            Kami adalah Mitra Pertumbuhan.
+          </motion.h2>
+          <motion.p variants={itemVariants} className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto">
+            Kami percaya bahwa konten hebat bukan hanya tentang estetika, tetapi tentang hasil. Inilah mengapa brand-brand ambisius memilih kami.
+          </motion.p>
         </motion.div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group rounded-2xl bg-white/5 backdrop-blur-md p-8 text-center shadow-xl border border-white/10 hover:shadow-blue-500/30 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="mb-6">
-                <stat.icon className="w-12 h-12 text-blue-400 mx-auto group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <div className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 mb-2">
-                {stat.number}
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-1">{stat.label}</h3>
-              <p className="text-sm text-gray-400">{stat.description}</p>
-            </motion.div>
-          ))}
+        {/* Grid "Why Us" dan Statistik */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Bagian Kiri: Poin Keunggulan */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-8"
+          >
+            {whyPoints.map((point, index) => (
+              <motion.div key={index} variants={itemVariants} className="flex gap-6 items-start">
+                <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-sky-900 to-blue-900/50 rounded-xl flex items-center justify-center border border-white/10">
+                  <point.icon className="w-8 h-8 text-sky-300" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-1">{point.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{point.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Bagian Kanan: Statistik dalam Kartu */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="glass-card rounded-2xl p-6 text-center transition-transform duration-300 hover:-translate-y-2"
+              >
+                <stat.icon className="w-10 h-10 text-sky-400 mx-auto mb-4" />
+                <div className="text-4xl font-bold text-white mb-1">
+                  {stat.number}
+                </div>
+                <h3 className="text-md font-semibold text-gray-200">{stat.label}</h3>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-
-        {/* Story */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="rounded-3xl bg-white/5 backdrop-blur-xl p-12 max-w-5xl mx-auto border border-white/10 shadow-2xl"
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold mb-6">
-                Mengapa Klien Memilih{' '}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Benerun Pro?</span>
-              </h3>
-              <div className="space-y-6 text-gray-300">
-                {[
-                  ['Strategi Data-Driven', 'Setiap konten dibuat berdasarkan analisis mendalam terhadap target audience dan tren terkini.', 'bg-blue-400'],
-                  ['Tim Kreatif Berpengalaman', 'Didukung oleh tim profesional dengan track record di berbagai industri dan platform.', 'bg-purple-400'],
-                  ['Hasil Terukur & Konsisten', 'Komitmen untuk memberikan peningkatan engagement dan reach yang signifikan dalam waktu singkat.', 'bg-green-400']
-                ].map(([title, desc, dot], i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className={`w-3 h-3 rounded-full mt-2 flex-shrink-0 ${dot}`} />
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-1">{title}</h4>
-                      <p className="text-sm">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: [0, 2, -2, 0] }}
-                transition={{ duration: 6, repeat: Infinity }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl"
-              >
-                <img
-                  className="w-full h-80 object-cover"
-                  src="https://images.unsplash.com/photo-1690191886622-fd8d6cda73bd"
-                  alt="Tim kreatif Benerun Pro"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </motion.div>
-
-              {/* Floating Badge */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 rounded-full p-4 border border-yellow-400/30 bg-white/10 backdrop-blur-md"
-              >
-                <Award className="w-8 h-8 text-yellow-400" />
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
